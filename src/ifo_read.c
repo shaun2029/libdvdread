@@ -911,9 +911,14 @@ static int ifoRead_PGC(ifo_handle_t *ifofile, pgc_t *pgc, unsigned int offset) {
     CHECK_VALUE(pgc->cell_position_offset == 0);
   } else {
     CHECK_VALUE(pgc->program_map_offset != 0);
-    CHECK_VALUE(pgc->cell_playback_offset != 0);
+
+// ShaunS - Hack to get VLC to playback some DVDs
+//    CHECK_VALUE(pgc->cell_playback_offset != 0);
+if (pgc->cell_playback_offset == 0) return 0;
+
     CHECK_VALUE(pgc->cell_position_offset != 0);
   }
+
 
   if(pgc->command_tbl_offset != 0) {
     pgc->command_tbl = malloc(sizeof(pgc_command_tbl_t));
