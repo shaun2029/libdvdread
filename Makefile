@@ -78,7 +78,7 @@ ${DVDREAD_LIB}: version.h $(DVDREAD_OBJS) $(BUILDDEPS)
 	cd $(.OBJDIR) && $(RANLIB) $@
 
 ${DVDREAD_SHLIB}: version.h $(DVDREAD_SHOBJS) $(BUILDDEPS)
-	cd $(.OBJDIR) && $(CC) $(SHLDFLAGS) $(LDFLAGS) -ldl -Wl,-soname=$(DVDREAD_SHLIB).$(SHLIB_MAJOR) -o $@ $(DVDREAD_SHOBJS)
+	cd $(.OBJDIR) && $(CC) $(SHLDFLAGS) $(LDFLAGS) -Wl,-soname=$(DVDREAD_SHLIB).$(SHLIB_MAJOR) -o $@ $(DVDREAD_SHOBJS) -ldl
 
 .c.so:	$(BUILDDEPS)
 	cd $(.OBJDIR) && $(CC) -fPIC -DPIC -MD $(CFLAGS) -c -o $@ $<
